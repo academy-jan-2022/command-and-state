@@ -66,13 +66,20 @@ public class PlayerShould {
 		assertInstanceOf(DancingPlayer.class, result);
 	}
 
-
-
 	@Test void
 	stop_defending_when_asked_to_stop() {
 		Player player = new DefendingPlayer();
 		player.queue(STOP);
 		var result = player.execute();
 		assertInstanceOf(IdlePlayer.class, result);
+	}
+
+	@ParameterizedTest
+	@CsvSource({"ATTACK", "DANCE", "DEFEND"}) void
+	keep_defending_when_told_to_do_other_actions(Command command) {
+		Player player = new DefendingPlayer();
+		player.queue(command);
+		var result = player.execute();
+		assertInstanceOf(DefendingPlayer.class, result);
 	}
 }
