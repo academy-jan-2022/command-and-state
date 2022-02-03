@@ -1,9 +1,10 @@
 package example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Player {
-	private List<Command> commands;
+	private final List<Command> commands = new ArrayList<>();
 
 	public void queue(Command command) {
 		commands.add(command);
