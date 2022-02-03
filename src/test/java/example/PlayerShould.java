@@ -14,11 +14,19 @@ public class PlayerShould {
 	}
 
 	@Test void
-	starts_dancing_when_idle() {
+	start_dancing_when_idle() {
 		Player player = new IdlePlayer();
 		player.queue(DANCE);
 		var result = player.execute();
 		assertInstanceOf(DancingPlayer.class, result);
+	}
+
+	@Test void
+	stay_idle_when_asked_to_stop() {
+		Player player = new IdlePlayer();
+		player.queue(STOP);
+		var result = player.execute();
+		assertInstanceOf(IdlePlayer.class, result);
 	}
 
 	@Test void
