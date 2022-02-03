@@ -3,6 +3,8 @@ package example;
 public class AttackingPlayer extends Player {
 	@Override
 	protected Player execute(Command command) {
-		return new IdlePlayer();
+		if (command == Command.STOP)
+			return new IdlePlayer();
+		return this;
 	}
 }
