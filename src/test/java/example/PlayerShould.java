@@ -17,6 +17,9 @@ public class PlayerShould {
 	keep_dancing_when_told_to_attack() {
 		Player player = new DancingPlayer();
 		player.queue(ATTACK);
+		player.queue(ATTACK);
+		player.queue(ATTACK);
+		player.queue(ATTACK);
 		var result = player.execute();
 		assertInstanceOf(DancingPlayer.class, result);
 	}

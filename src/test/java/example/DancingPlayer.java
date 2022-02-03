@@ -5,6 +5,6 @@ public class DancingPlayer extends Player {
 	protected Player execute(Command command) {
 		if (command == Command.STOP)
 			return new IdlePlayer();
-		return null;
+		return this;
 	}
 }
