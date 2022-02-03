@@ -5,6 +5,6 @@ public class IdlePlayer extends Player {
 	protected Player execute(Command command) {
 		if (command == Command.DANCE)
 			return new DancingPlayer();
-		return null;
+		return this;
 	}
 }
