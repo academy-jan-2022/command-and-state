@@ -38,6 +38,14 @@ public class PlayerShould {
 	}
 
 	@Test void
+	stop_attacking_when_asked_to_stop() {
+		Player player = new AttackingPlayer();
+		player.queue(STOP);
+		var result = player.execute();
+		assertInstanceOf(IdlePlayer.class, result);
+	}
+
+	@Test void
 	keep_dancing_when_told_to_attack() {
 		Player player = new DancingPlayer();
 		player.queue(ATTACK);
