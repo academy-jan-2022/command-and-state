@@ -84,10 +84,18 @@ public class PlayerShould {
 	}
 
 	@Test void
-	stop_defending_after_two_turns_when_defending() {
+	stop_defending_after_two_turns() {
 		Player player = new DefendingPlayer();
 		player.queue(ATTACK);
 		player.queue(ATTACK);
+		var result = player.execute();
+		assertInstanceOf(IdlePlayer.class, result);
+	}
+
+	@Test void
+	stop_attacking_after_one_turn() {
+		Player player = new AttackingPlayer();
+		player.queue(DEFEND);
 		var result = player.execute();
 		assertInstanceOf(IdlePlayer.class, result);
 	}
