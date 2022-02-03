@@ -49,7 +49,7 @@ public class PlayerShould {
 	}
 
 	@ParameterizedTest
-	@CsvSource({"ATTACK", "DANCE"}) void
+	@CsvSource({"ATTACK", "DANCE", "DEFEND"}) void
 	keep_attacking_on_other_commands(Command command) {
 		Player player = new AttackingPlayer();
 		player.queue(command);
@@ -57,14 +57,22 @@ public class PlayerShould {
 		assertInstanceOf(AttackingPlayer.class, result);
 	}
 
-	@Test void
-	keep_dancing_when_told_to_attack() {
+	@ParameterizedTest
+	@CsvSource({"ATTACK", "DANCE", "DEFEND"}) void
+	keep_dancing_when_told_to_do_other_actions(Command command) {
 		Player player = new DancingPlayer();
-		player.queue(ATTACK);
-		player.queue(ATTACK);
-		player.queue(ATTACK);
-		player.queue(ATTACK);
+		player.queue(command);
 		var result = player.execute();
 		assertInstanceOf(DancingPlayer.class, result);
+	}
+
+
+
+	@Test void
+	stop_defending_when_asked_to_stop() {
+		Player player = new DefendingPlayer();
+		player.queue(STOP);
+		var result = player.execute();
+		assertInstanceOf(IdlePlayer.class, result);
 	}
 }
