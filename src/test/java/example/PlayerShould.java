@@ -91,4 +91,15 @@ public class PlayerShould {
 		var result = player.execute();
 		assertInstanceOf(IdlePlayer.class, result);
 	}
+
+	@ParameterizedTest
+	@CsvSource({"ATTACK", "DANCE", "DEFEND"}) void
+	stop_dancing_after_three_turns(Command command) {
+		Player player = new DancingPlayer();
+		player.queue(command);
+		player.queue(command);
+		player.queue(command);
+		var result = player.execute();
+		assertInstanceOf(IdlePlayer.class, result);
+	}
 }
