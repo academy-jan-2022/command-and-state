@@ -3,6 +3,9 @@ package example;
 import static example.Command.*;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class PlayerShould {
 	@Test void
@@ -43,6 +46,15 @@ public class PlayerShould {
 		player.queue(STOP);
 		var result = player.execute();
 		assertInstanceOf(IdlePlayer.class, result);
+	}
+
+	@ParameterizedTest
+	@CsvSource({"ATTACK", "DANCE"}) void
+	keep_attacking_on_other_commands(Command command) {
+		Player player = new AttackingPlayer();
+		player.queue(command);
+		var result = player.execute();
+		assertInstanceOf(AttackingPlayer.class, result);
 	}
 
 	@Test void
