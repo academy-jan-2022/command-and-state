@@ -82,4 +82,13 @@ public class PlayerShould {
 		var result = player.execute();
 		assertInstanceOf(DefendingPlayer.class, result);
 	}
+
+	@Test void
+	stop_defending_after_two_turns_when_defending() {
+		Player player = new DefendingPlayer();
+		player.queue(ATTACK);
+		player.queue(ATTACK);
+		var result = player.execute();
+		assertInstanceOf(IdlePlayer.class, result);
+	}
 }
