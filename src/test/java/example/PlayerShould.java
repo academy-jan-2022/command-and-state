@@ -30,6 +30,14 @@ public class PlayerShould {
 	}
 
 	@Test void
+	start_attacking_when_idle() {
+		Player player = new IdlePlayer();
+		player.queue(ATTACK);
+		var result = player.execute();
+		assertInstanceOf(AttackingPlayer.class, result);
+	}
+
+	@Test void
 	keep_dancing_when_told_to_attack() {
 		Player player = new DancingPlayer();
 		player.queue(ATTACK);
